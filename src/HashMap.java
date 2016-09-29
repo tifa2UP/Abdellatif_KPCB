@@ -13,8 +13,13 @@ public class HashMap {
     public HashMap(int size){
         keys = new String[size];
         values = new Object[size];
+        this.size = size;
     }
 
+    /**
+     * Adds a given key/value pair to the hashmap, if the key exists, the value will be updated
+     * @return true if the operation was successful, false otherwise
+     */
     public boolean set(String key, Object value){
         //if the key doesn't exist, generate a new item
         if (findKeyIndex(key) == -1){
@@ -51,6 +56,12 @@ public class HashMap {
         return -1;
     }
 
+    /**
+     * Gets the value of a given key
+     * Returns null if the key doesn't exist
+     * @param key the key to get the value pair of
+     * @return the value of associated with the key, null if it's not found
+     */
     public Object get(String key){
         //return null if the key isn't found
         if (findKeyIndex(key) == -1){
@@ -73,6 +84,7 @@ public class HashMap {
             Object value = values[keyIndex];
 
             //replace the element to be deleted with the last item
+            //this step is unnecessary if the last item is going to be deleted
             if (keyIndex != items){
                 keys[keyIndex] = keys[items];
                 values[keyIndex] = values[keyIndex];
@@ -81,5 +93,13 @@ public class HashMap {
             items--;
             return value;
         }
+    }
+
+    /**
+     * return a float value representing the load factor (`(items in hash map)/(size of hash map)`)
+     * of the data structure. Since the size of the dat structure is fixed, this should never be greater than 1
+     */
+    public float load(){
+        return items/size;
     }
 }

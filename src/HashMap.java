@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 /**
  * Created by Abdellatif on 9/28/2016.
  */
@@ -61,6 +59,27 @@ public class HashMap {
         //return the value associated with the given key
         else{
             return values[findKeyIndex(key)];
+        }
+    }
+
+    public Object delete(String key){
+        int keyIndex = findKeyIndex(key);
+        //return null if the key isn't found
+        if (keyIndex == -1){
+            return null;
+        }
+        else{
+            //save the value to return it
+            Object value = values[keyIndex];
+
+            //replace the element to be deleted with the last item
+            if (keyIndex != items){
+                keys[keyIndex] = keys[items];
+                values[keyIndex] = values[keyIndex];
+            }
+            //then decrement the items count
+            items--;
+            return value;
         }
     }
 }
